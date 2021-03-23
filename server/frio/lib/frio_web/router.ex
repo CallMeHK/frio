@@ -15,8 +15,12 @@ defmodule FrioWeb.Router do
 
   scope "/", FrioWeb do
     pipe_through :browser
-
     get "/", PageController, :index
+  end
+
+  scope "/" do
+    forward "/graphiql", Absinthe.Plug.GraphiQL, schema: FrioGql.Schema
+    forward "/graph", Absinthe.Plug, schema: FrioGql.Schema
   end
 
   # Other scopes may use custom stacks.

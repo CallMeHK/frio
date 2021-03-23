@@ -4,7 +4,8 @@ use Mix.Config
 config :frio, Frio.Repo,
   username: "postgres",
   password: "postgres",
-  database: "frio_dev",
+  port: 35432,
+  database: "db",
   hostname: "localhost",
   show_sensitive_data_on_connection_error: true,
   pool_size: 10
@@ -16,7 +17,7 @@ config :frio, Frio.Repo,
 # watchers to your application. For example, we use it
 # with webpack to recompile .js and .css sources.
 config :frio, FrioWeb.Endpoint,
-  http: [port: 4000],
+  http: [port: 666],
   debug_errors: true,
   code_reloader: true,
   check_origin: false,
