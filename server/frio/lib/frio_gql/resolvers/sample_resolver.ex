@@ -13,7 +13,7 @@ defmodule FrioGql.Resolvers.Sample do
     Samples.update(id, updates)
   end
 
-  def subbox(_args, %{source: %{id: sub_box_id} = _box} = _info),
-    do: {:ok, Samples.where(sub_box_id: sub_box_id)}
+  def box(_args, %{source: %{id: box_id} = _box} = _info),
+    do: {:ok, Samples.where(box_id: box_id)}
 
 end

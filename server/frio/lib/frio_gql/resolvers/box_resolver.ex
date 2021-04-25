@@ -6,7 +6,7 @@ defmodule FrioGql.Resolvers.Box do
     {:ok, Boxes.all()}
   end
 
-  def freezer(_args, %{source: %{id: freezer_id} = _freezer} = _info),
-    do: {:ok, Boxes.where(freezer_id: freezer_id)}
+  def rack(_args, %{source: %{id: rack_id} = _rack} = _info),
+    do: {:ok, Boxes.where(rack_id: rack_id)}
 
 end

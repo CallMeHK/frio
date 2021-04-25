@@ -4,8 +4,8 @@ defmodule FrioGql.Schema do
 
   import_types FrioGql.Schema.Comment
   import_types FrioGql.Schema.Freezer
+  import_types FrioGql.Schema.Rack
   import_types FrioGql.Schema.Box
-  import_types FrioGql.Schema.SubBox
   import_types FrioGql.Schema.Sample
   import_types Absinthe.Type.Custom
 
@@ -21,14 +21,14 @@ defmodule FrioGql.Schema do
       resolve &Resolvers.Freezer.all/3
     end
 
+    @desc "Get all racks"
+    field :racks, list_of(:rack) do
+      resolve &Resolvers.Rack.all/3
+    end
+
     @desc "Get all boxes"
     field :boxes, list_of(:box) do
       resolve &Resolvers.Box.all/3
-    end
-
-    @desc "Get all subboxes"
-    field :subboxes, list_of(:subbox) do
-      resolve &Resolvers.SubBox.all/3
     end
 
     @desc "Get all samples"

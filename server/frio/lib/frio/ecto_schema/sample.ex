@@ -2,7 +2,7 @@ defmodule Frio.Sample do
   use Ecto.Schema
   import Ecto.Changeset
 
-  alias Frio.SubBox
+  alias Frio.Box
 
   schema "samples" do
     field :number, :integer
@@ -10,16 +10,17 @@ defmodule Frio.Sample do
     field :cell_count, :integer
     field :experiment_name, :string
     field :notes, :string
-
+    field :box_row, :integer
+    field :box_column, :integer
 
     timestamps()
 
-    belongs_to(:sub_box, SubBox, foreign_key: :sub_box_id)
+    belongs_to(:box, Box, foreign_key: :box_id)
   end
 
   def changeset(sample, attrs) do
     sample
-    |> cast(attrs, [:number, :name, :cell_count, :experiment_name, :notes, :sub_box_id])
-    |> validate_required([:number, :name, :sub_box_id])
+    |> cast(attrs, [:number, :name, :cell_count, :experiment_name, :notes, :box_id])
+    |> validate_required([:number, :name, :box_id])
   end
 end

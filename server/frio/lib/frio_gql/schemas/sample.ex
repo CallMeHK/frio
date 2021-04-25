@@ -10,7 +10,9 @@ defmodule FrioGql.Schema.Sample do
     field :cell_count, :integer
     field :experiment_name, :string
     field :notes, :string
-    field :sub_box_id, :integer
+    field :box_id, :integer
+    field :box_row, :integer
+    field :box_column, :integer
  
 
     field :inserted_at, :naive_datetime
@@ -25,7 +27,7 @@ defmodule FrioGql.Schema.Sample do
       arg :cell_count, :integer
       arg :experiment_name, :string
       arg :notes, :string
-      arg :sub_box_id, non_null :integer
+      arg :box_id, non_null :integer
 
       resolve &Resolvers.Sample.create/3
     end
@@ -38,7 +40,7 @@ defmodule FrioGql.Schema.Sample do
       arg :cell_count, :integer
       arg :experiment_name, :string
       arg :notes, :string
-      arg :sub_box_id, :integer
+      arg :box_id, :integer
 
       resolve &Resolvers.Sample.update/3
     end

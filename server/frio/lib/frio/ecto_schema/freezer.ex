@@ -2,14 +2,14 @@ defmodule Frio.Freezer do
   use Ecto.Schema
   import Ecto.Changeset
 
-  alias Frio.Box
+  alias Frio.Rack
 
   schema "freezers" do
     field :name, :string
 
     timestamps()
 
-    has_many(:boxes, Box)
+    has_many(:racks, Rack)
   end
 
   def changeset(freezer, attrs) do

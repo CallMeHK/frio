@@ -13,8 +13,8 @@
 
 defmodule Frio.SeedDB do
   alias Frio.Repo.Freezers
+  alias Frio.Repo.Racks
   alias Frio.Repo.Boxes
-  alias Frio.Repo.SubBoxes
   alias Frio.Repo.Samples
   alias Frio.SeedDB
   alias Frio.Repo
@@ -24,16 +24,16 @@ defmodule Frio.SeedDB do
     Freezers.insert(%{name: "Freezer 2"}) 
   end
 
-  def seed_boxes do
+  def seed_racks do
 
     Freezers.all()
     |> Enum.map(fn freezer ->
-      Boxes.insert(%{
+      Racks.insert(%{
         number: 1,
         freezer_id: freezer.id,
         capacity: 10
       })
-      Boxes.insert(%{
+      Racks.insert(%{
         number: 2,
         freezer_id: freezer.id,
         capacity: 10
@@ -41,42 +41,42 @@ defmodule Frio.SeedDB do
       end)
   end
 
-  def seed_subboxes do
-    Boxes.all()
-    |> Enum.map(fn box -> 
-      SubBoxes.insert(%{
+  def seed_boxes do
+    Racks.all()
+    |> Enum.map(fn rack -> 
+      Boxes.insert(%{
         number: 1,
-        box_id: box.id,
+        rack_id: rack.id,
         capacity: 64
       })
-      SubBoxes.insert(%{
+      Boxes.insert(%{
         number: 2,
-        box_id: box.id,
+        rack_id: rack.id,
         capacity: 64
       })
-      SubBoxes.insert(%{
+      Boxes.insert(%{
         number: 3,
-        box_id: box.id,
+        rack_id: rack.id,
         capacity: 64
       })
-      SubBoxes.insert(%{
+      Boxes.insert(%{
         number: 4,
-        box_id: box.id,
+        rack_id: rack.id,
         capacity: 64
       })
     end)
   end
 
   def seed_samples do 
-    SubBoxes.all()
-    |> Enum.map(fn subbox -> 
+    Boxes.all()
+    |> Enum.map(fn box -> 
       1..12
       |> Enum.map(fn index -> 
         Samples.insert(%{
           number: index,
-          name: "sample-#{subbox.id}-#{index}",
-          cell_count: index * 32 * subbox.id * 10000,
-          sub_box_id: subbox.id
+          name: "sample-#{box.id}-#{index}",
+          cell_count: index * 32 * box.id * 10000,
+          box_id: box.id
         })
       end)
     end)
@@ -85,14 +85,14 @@ defmodule Frio.SeedDB do
 
   def log_seeds do
     Freezers.all()
-    |> Repo.preload(boxes: [subboxes: [:samples]])
+    |> Repo.preload(racks: [boxes: [:samples]])
     |> IO.inspect()
   end
 
   def run_seeds do
     SeedDB.seed_freezers()
+    SeedDB.seed_racks()
     SeedDB.seed_boxes()
-    SeedDB.seed_subboxes()
     SeedDB.seed_samples()
 
     SeedDB.log_seeds()

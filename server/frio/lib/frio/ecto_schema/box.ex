@@ -2,22 +2,25 @@ defmodule Frio.Box do
   use Ecto.Schema
   import Ecto.Changeset
 
-  alias Frio.SubBox
-  alias Frio.Freezer
+  alias Frio.Rack
+  alias Frio.Sample
 
   schema "boxes" do
     field :number, :integer
     field :capacity, :integer
+    field :rack_position, :integer
+    field :rows, :integer
+    field :columns, :integer
 
     timestamps()
 
-    has_many(:subboxes, SubBox)
-    belongs_to(:freezer, Freezer, foreign_key: :freezer_id)
+    belongs_to(:rack, Rack, foreign_key: :rack_id)
+    has_many(:samples, Sample)
   end
 
   def changeset(box, attrs) do
     box
-    |> cast(attrs, [:number, :capacity, :freezer_id])
-    |> validate_required([:number, :capacity, :freezer_id])
+    |> cast(attrs, [:number, :capacity, :rack_id, :rows, :columns, :rack_position])
+    |> validate_required([:number, :capacity, :rack_id])
   end
 end

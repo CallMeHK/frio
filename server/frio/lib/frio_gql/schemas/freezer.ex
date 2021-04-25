@@ -8,8 +8,8 @@ defmodule FrioGql.Schema.Freezer do
     field :inserted_at, :naive_datetime
     field :updated_at, :naive_datetime
 
-    field :boxes, list_of(:box) do
-      resolve(&FrioGql.Resolvers.Box.freezer/2)
+    field :racks, list_of(:rack) do
+      resolve(&FrioGql.Resolvers.Rack.freezer/2)
     end
   end
 end
