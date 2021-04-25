@@ -1,14 +1,14 @@
 import * as React from "react";
 import {
-  BrowserRouter as Router,
+  BrowserRouter,
   Switch,
   Route,
   Link
 } from "react-router-dom";
 
-const Router: React.FC = () =>  {
+const Router: React.FC = () => {
   return (
-    <Router>
+    <BrowserRouter>
       <div>
         <nav>
           <ul>
@@ -24,21 +24,19 @@ const Router: React.FC = () =>  {
           </ul>
         </nav>
 
-        {/* A <Switch> looks through its children <Route>s and
-            renders the first one that matches the current URL. */}
         <Switch>
           <Route path="/about">
-						<div>about</div>
+            <div>about</div>
           </Route>
           <Route path="/users">
-						<div>users</div>
+            <div>users</div>
           </Route>
           <Route path="/">
-						<div>home</div>
+            <div>home</div>
           </Route>
         </Switch>
       </div>
-    </Router>
+    </BrowserRouter>
   );
 }
 
