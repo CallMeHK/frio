@@ -3,38 +3,29 @@ import {
   BrowserRouter,
   Switch,
   Route,
-  Link
+  Link,
+  Redirect
 } from "react-router-dom";
+import TabNav from '../components/layout/TabNav'
+import FreezerView from "./Map/FreezerView";
 
 const Router: React.FC = () => {
   return (
     <BrowserRouter>
       <div>
-        <nav>
-          <ul>
-            <li>
-              <Link to="/">Home</Link>
-            </li>
-            <li>
-              <Link to="/about">About</Link>
-            </li>
-            <li>
-              <Link to="/users">Users</Link>
-            </li>
-          </ul>
-        </nav>
-
-        <Switch>
-          <Route path="/about">
-            <div>about</div>
-          </Route>
-          <Route path="/users">
-            <div>users</div>
-          </Route>
-          <Route path="/">
-            <div>home</div>
-          </Route>
-        </Switch>
+        <TabNav>
+          <Switch>
+            <Route exact path="/">
+              <Redirect to="/search" />
+            </Route>
+            <Route path="/search">
+              <div>search</div>
+            </Route>
+            <Route path={["/map", "/map/:freezer"]}>
+              <FreezerView />
+            </Route>
+          </Switch>
+        </ TabNav>
       </div>
     </BrowserRouter>
   );

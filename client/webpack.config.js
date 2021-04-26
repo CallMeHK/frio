@@ -8,8 +8,9 @@ module.exports = {
     filename: "index.js",
     path: path.resolve(__dirname, "../dist/app"),
     clean: true,
+    publicPath: '/',
   },
-plugins: [
+  plugins: [
     new HtmlWebpackPlugin({
       template: 'public/index.html'
     })
@@ -30,6 +31,10 @@ plugins: [
   devtool: 'inline-source-map',
   devServer: {
     contentBase: '../dist/app',
+    historyApiFallback: true,
+    proxy: {
+      '/graph': 'http://localhost:666'
+    }
   }
 
 }
